@@ -15,22 +15,7 @@ You can install the development version from GitHub:
 
 ``` r
 install.packages("remotes")
-#> Installing package into '/private/var/folders/bh/n37k64rd6nb77xbkb9fgzpf00000gn/T/RtmpdrpUZl/temp_libpath12e307b58ff47'
-#> (as 'lib' is unspecified)
-#> 
-#> The downloaded binary packages are in
-#>  /var/folders/bh/n37k64rd6nb77xbkb9fgzpf00000gn/T//Rtmp9cpO4F/downloaded_packages
 remotes::install_github("havanashw/QBootTest")
-#> Downloading GitHub repo havanashw/QBootTest@HEAD
-#> ── R CMD build ─────────────────────────────────────────────────────────────────
-#> * checking for file ‘/private/var/folders/bh/n37k64rd6nb77xbkb9fgzpf00000gn/T/Rtmp9cpO4F/remotes12f585c3054ca/havanashw-QBootTest-608ed45/DESCRIPTION’ ... OK
-#> * preparing ‘QBootTest’:
-#> * checking DESCRIPTION meta-information ... OK
-#> * checking for LF line-endings in source and make files and shell scripts
-#> * checking for empty or unneeded directories
-#> * building ‘QBootTest_0.1.0.tar.gz’
-#> Installing package into '/private/var/folders/bh/n37k64rd6nb77xbkb9fgzpf00000gn/T/RtmpdrpUZl/temp_libpath12e307b58ff47'
-#> (as 'lib' is unspecified)
 ```
 
 ## Example
