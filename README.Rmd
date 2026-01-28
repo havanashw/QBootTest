@@ -1,0 +1,78 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# QBootTest
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of QBootTest is to conduct multiplier bootstrap tests for high-dimensional quantile regression
+
+## Installation
+
+You can install the development version from GitHub:
+
+```{r}
+install.packages("remotes")
+remotes::install_github("havanashw/QBootTest")
+```
+
+## Example
+
+### Asymptotic p-value
+
+```{r}
+library(QBootTest)
+
+set.seed(1)
+n <- 80; p <- 50
+x <- matrix(rnorm(n * p), n, p)
+y <- rnorm(n)
+
+QBootTest(x, y, tau = 0.5, method = "asymptotic")
+```
+
+### Multiplier bootstrap p-value
+
+```{r}
+set.seed(1)
+n <- 80; p <- 50
+x <- matrix(rnorm(n * p), n, p)
+y <- rnorm(n)
+
+QBootTest(x, y, tau = 0.5, method = "bootstrap", multiplier = "gaussian", M = 200)
+```
+
+### Return test statistic and bootstrap draws (optional)
+
+If you want the test statistic and bootstrap replicates for plots, use `return_details = TRUE`
+
+```{r}
+set.seed(1)
+n <- 80; p <- 50
+x <- matrix(rnorm(n * p), n, p)
+y <- rnorm(n)
+
+res <- quantile_score_test(x, y, tau = 0.5, method = "bootstrap", 
+                           multiplier = "rademacher", M = 200,
+                           return_details = TRUE)
+str(res, max.level = 1)
+```
+
+## Notes
+
+1. $x$ should be an $n \times p$ numeric matrix and $y$ is a length-$n$ numeric vector.
+
+2. Use `scale = TRUE` if you want to standardize $x$ and $y$ before computing the test.
