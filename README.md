@@ -1,13 +1,7 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # QBootTest
 
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of QBootTest is to conduct multiplier bootstrap tests for
-high-dimensional quantile regression
+The goal of QBootTest is to conduct multiplier bootstrap tests for high-dimensional quantile regression.
 
 ## Installation
 
@@ -24,47 +18,41 @@ remotes::install_github("havanashw/QBootTest")
 
 ``` r
 library(QBootTest)
+library(MASS)
 
 set.seed(1)
 n <- 80; p <- 50
-x <- matrix(rnorm(n * p), n, p)
-y <- rnorm(n)
+beta.true <- rep(1, p)
+Sig <- toeplitz(0.5^seq(0, p-1))
+error <- rnorm(n)
+x <- mvrnorm(n, mu=rep(0, p), Sigma=Sig)
+y <- x%*%beta.true + error
 
 QBootTest(x, y, tau = 0.5, method = "asymptotic")
-#> [1] 0.3513358
+#> [1] 0
 ```
 
 ### Multiplier bootstrap p-value
 
 ``` r
-set.seed(1)
-n <- 80; p <- 50
-x <- matrix(rnorm(n * p), n, p)
-y <- rnorm(n)
-
 QBootTest(x, y, tau = 0.5, method = "bootstrap", multiplier = "gaussian", M = 200)
-#> [1] 0.3432836
+#> [1] 0.004975124
 ```
 
 ### Return test statistic and bootstrap draws (optional)
 
 If you want the test statistic and bootstrap replicates for plots, use
-`return_details = TRUE`
+`return_details = TRUE`:
 
 ``` r
-set.seed(1)
-n <- 80; p <- 50
-x <- matrix(rnorm(n * p), n, p)
-y <- rnorm(n)
-
 res <- QBootTest(x, y, tau = 0.5, method = "bootstrap", 
                  multiplier = "rademacher", M = 200,
                  return_details = TRUE)
 str(res, max.level = 1)
 #> List of 9
-#>  $ pval           : num 0.348
-#>  $ Tn             : num 1.02
-#>  $ bootstrap_stats: num [1:200] 4.87 8.27 1 4.31 -1.6 ...
+#>  $ pval           : num 0.00498
+#>  $ Tn             : num 31.6
+#>  $ bootstrap_stats: num [1:200] -1.424 0.684 3.131 2.512 0.374 ...
 #>  $ method         : chr "bootstrap"
 #>  $ multiplier     : chr "rademacher"
 #>  $ M              : int 200
@@ -75,8 +63,6 @@ str(res, max.level = 1)
 
 ## Notes
 
-1.  $x$ should be an $n \times p$ numeric matrix and $y$ is an $n$
-    numeric vector.
+1.  $x$ should be an $n \times p$ numeric matrix and $y$ is an $n$ numeric vector.
 
-2.  Use `scale = TRUE` if you want to standardize $x$ and $y$ before
-    computing the test.
+2.  Use `scale = TRUE` if you want to standardize $x$ and $y$ before computing the test.
