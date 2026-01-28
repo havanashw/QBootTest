@@ -75,7 +75,7 @@ str(res, max.level = 1)
 
 ## Notes
 
-1.  $x$ should be an $n \times p$ numeric matrix and $y$ is a length-$n$
+1.  $x$ should be an $n \times p$ numeric matrix and $y$ is an $n$
     numeric vector.
 
 2.  Use `scale = TRUE` if you want to standardize $x$ and $y$ before
