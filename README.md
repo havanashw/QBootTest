@@ -25,7 +25,7 @@ n <- 80; p <- 50
 beta.true <- rep(1, p)
 Sig <- toeplitz(0.5^seq(0, p-1))
 error <- rnorm(n)
-x <- mvrnorm(n, mu=rep(0, p), Sigma=Sig)
+x <- MASS::mvrnorm(n, mu=rep(0, p), Sigma=Sig)
 y <- x%*%beta.true + error
 
 QBootTest(x, y, tau = 0.5, method = "asymptotic")
