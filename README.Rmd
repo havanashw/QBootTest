@@ -65,9 +65,9 @@ n <- 80; p <- 50
 x <- matrix(rnorm(n * p), n, p)
 y <- rnorm(n)
 
-res <- quantile_score_test(x, y, tau = 0.5, method = "bootstrap", 
-                           multiplier = "rademacher", M = 200,
-                           return_details = TRUE)
+res <- QBootTest(x, y, tau = 0.5, method = "bootstrap", 
+                 multiplier = "rademacher", M = 200,
+                 return_details = TRUE)
 str(res, max.level = 1)
 ```
 

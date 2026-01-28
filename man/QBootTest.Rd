@@ -45,7 +45,7 @@ set.seed(1)
 n <- 80; p <- 50
 x <- matrix(rnorm(n * p), n, p)
 y <- rnorm(n)
-quantile_score_test(x, y, tau = 0.5, method = "asymptotic")
-quantile_score_test(x, y, tau = 0.5, method = "bootstrap", M = 200)
+QBootTest(x, y, tau = 0.5, method = "asymptotic")
+QBootTest(x, y, tau = 0.5, method = "bootstrap", M = 200)
 
 }
